@@ -6,13 +6,12 @@
 <body class="register-page sidebar-collapse">
  	<%@ include file="/WEB-INF/views/include/top.jsp" %>
 
-  <div class="page-header" style="background-image: url('<c:url value="/resources/img/bg-masthead.jpg"/>');">
-    <div class="filter"></div>
+  <div class="page-header" style="background-image: url('/resources/img/bg-masthead.jpg');">
     <div class="container">
       <div class="row">
         <div class="col-lg-4 ml-auto mr-auto">
           <div class="card card-register">
-            <h3 class="title mx-auto">Welcome</h3>
+            <h3 class="title mx-auto">로그인</h3>
             <div class="social-line text-center">
               <a href="#pablo" class="btn btn-neutral btn-facebook btn-just-icon">
                 <i class="fa fa-facebook-square"></i>
@@ -29,10 +28,11 @@
               <input type="text" class="form-control" placeholder="Email">
               <label>Password</label>
               <input type="password" class="form-control" placeholder="Password">
-              <button class="btn btn-danger btn-block btn-round">Register</button>
+              <a href="login"><button class="btn btn-danger btn-block btn-round">Login</button></a>
             </form>
             <div class="forgot">
-              <a href="#" class="btn btn-link btn-danger">Forgot password?</a>
+              <a href="#" class="btn btn-link btn-danger">계정찾기</a>
+              <a href="member" class="btn btn-link btn-danger">회원가입</a>
             </div>
           </div>
         </div>

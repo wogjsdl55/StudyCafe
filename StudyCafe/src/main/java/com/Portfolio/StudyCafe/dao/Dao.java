@@ -5,29 +5,33 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.PreparedStatementSetter;
-import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
 
 import com.Portfolio.StudyCafe.dto.Dto;
-import com.Portfolio.StudyCafe.util.Constant;;
 
-public class Dao {
+public class Dao implements IDao {
 
 	JdbcTemplate template;
 	
+	@Autowired
+	public void setTemplate(JdbcTemplate template) {
+		this.template = template;
+	}
+	
 	public Dao() {
-		this.template = Constant.template;
+		// TODO Auto-generated constructor stub
 	}
 	
 	
-	public ArrayList<Dto> list() {
-		
-		String query = "select bId, bName, bTitle, bContent, bDate, bHit, bGroup, bStep, bIndent from mvc_board order by bGroup desc, bStep asc";
-		return (ArrayList<Dto>) template.query(query, new BeanPropertyRowMapper<Dto>(Dto.class));
-		
+	@Override
+	public ArrayList<Dto> listDao() {
+		String query = "select * from board order by mId desc";
+		ArrayList<Dto> dtos = (ArrayList<Dto>) template.query(query, new BeanPropertyRowMapper<Dto>(Dto.class));
+		return dtos;
 	}
 	
 	public void write(final String bName, final String bTitle, final String bContent) {
@@ -145,6 +149,27 @@ public class Dao {
 			}
 		});
 		
+	}
+	
+	public void member_proc(final String MId, final String MPwd, final String MName, final String MEmail, final String MNick) {
+		// TODO Auto-generated method stub
+		
+		this.template.update(new PreparedStatementCreator() {
+			
+			@Override
+			public PreparedStatement createPreparedStatement(Connection con)
+					throws SQLException {
+				String query =  " INSERT INTO mvc_member (MSeq, MId, MPwd, MName, MEmail, MNick ) " +
+								" VALUES (mvc_member_seq.nextval, ?, ?, ?, ?, ?)";
+				PreparedStatement pstmt = con.prepareStatement(query);
+				pstmt.setString(1, MId);
+				pstmt.setString(2, MPwd);
+				pstmt.setString(3, MName);
+				pstmt.setString(4, MEmail);
+				pstmt.setString(5, MNick);
+				return pstmt;
+			}
+		});
 	}
 	
 }

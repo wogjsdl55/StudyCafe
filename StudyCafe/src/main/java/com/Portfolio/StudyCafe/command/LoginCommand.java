@@ -14,7 +14,7 @@ public class LoginCommand implements Command {
 		// TODO Auto-generated method stub
 		
 		Dao dao = new Dao();
-		ArrayList<Dto> dtos = dao.list();
+		ArrayList<Dto> dtos = dao.listDao();
 		model.addAttribute("login", dtos);
 		
 	}

@@ -3,16 +3,12 @@
 <%@ page session="false" %>
 <html>
 <!DOCTYPE html>
-
-<html lang="UTF-8">
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
 <body class="landing-page sidebar-collapse">
-
   <%@ include file="/WEB-INF/views/include/top.jsp" %>
-  
-  <div class="page-header" data-parallax="true" style="background-image: url('<c:url value="/resources/img/bg-masthead.jpg"/>');">
-    <div class="filter"></div>
+
+  <div class="page-header" data-parallax="true" style="background-image: url('/resources/img/bg-masthead.jpg');">
     <div class="container">
       <div class="motto text-center">
         <h1>문화/학습/카페 공간</h1>
@@ -28,10 +24,14 @@
       <div class="container">
         <div class="row">
           <div class="col-md-8 ml-auto mr-auto">
-            <h2 class="title">Let's talk product</h2>
-            <h5 class="description">This is the paragraph where you can write more details about your product. Keep you user engaged by providing meaningful information. Remember that by this time, the user is curious, otherwise he wouldn't scroll to get here. Add a button if you want the user to see more.</h5>
+            <h2 class="title">노맨의 Study Cafe</h2>
+            <h5 class="description">
+            	130평대 대형 오픈형
+				스터디공간과<br/>
+				2~20인이 들어가는 독립형 스터디룸 10여개를 갖춘<br/>
+				노맨의 Study Cafe
+            </h5>
             <br>
-            <a href="#paper-kit" class="btn btn-danger btn-round">See Details</a>
           </div>
         </div>
         <br/>
@@ -40,130 +40,95 @@
           <div class="col-md-3">
             <div class="info">
               <div class="icon icon-danger">
-                <i class="nc-icon nc-album-2"></i>
+                <img src="/resources/img/trophy.png" style="width: 60px;">
               </div>
               <div class="description">
-                <h4 class="info-title">Beautiful Gallery</h4>
-                <p class="description">Spend your time generating new ideas. You don't have to think of implementing.</p>
-                <a href="javascript:;" class="btn btn-link btn-danger">See more</a>
+                <h4 class="info-title">집에서 과외하기 부담스러울 때</h4>
+                <p class="description">부모님도 선생님도 조금씩 부담스러운 과외공간.<br/>그럴 때 바로 노맨의 Study Cafe가 해결 공간이고자 해요.</p>
               </div>
             </div>
           </div>
           <div class="col-md-3">
             <div class="info">
               <div class="icon icon-danger">
-                <i class="nc-icon nc-bulb-63"></i>
+              	<img src="/resources/img/file.png" style="width: 60px;">
               </div>
               <div class="description">
-                <h4 class="info-title">New Ideas</h4>
-                <p>Larger, yet dramatically thinner. More powerful, but remarkably power efficient.</p>
-                <a href="javascript:;" class="btn btn-link btn-danger">See more</a>
+                <h4 class="info-title">자유롭고 독립적인 공간</h4>
+                <p>토론/모임 공간이 독립/자유롭고,<br/>최적의 OA 환경(대형모니터 등)을 갖춘 곳</p>
               </div>
             </div>
           </div>
           <div class="col-md-3">
             <div class="info">
               <div class="icon icon-danger">
-                <i class="nc-icon nc-chart-bar-32"></i>
+                <img src="/resources/img/circle.png" style="width: 60px;">
               </div>
               <div class="description">
-                <h4 class="info-title">Statistics</h4>
-                <p>Choose from a veriety of many colors resembling sugar paper pastels.</p>
-                <a href="javascript:;" class="btn btn-link btn-danger">See more</a>
+                <h4 class="info-title">오래 있어도 편한 곳</h4>
+                <p>커피숍처럼 오랫동안 있다고해도 눈치 보지 않아도 되는 곳</p>
               </div>
             </div>
           </div>
           <div class="col-md-3">
             <div class="info">
               <div class="icon icon-danger">
-                <i class="nc-icon nc-sun-fog-29"></i>
+                <img src="/resources/img/medal.png" style="width: 60px;">
               </div>
               <div class="description">
-                <h4 class="info-title">Delightful design</h4>
-                <p>Find unique and handmade delightful designs related items directly from our sellers.</p>
-                <a href="javascript:;" class="btn btn-link btn-danger">See more</a>
+                <h4 class="info-title">집에서는 도저히...</h4>
+                <p>집중도 안되고 뭔가 유혹이 많을 때…</br>노맨의 Study Cafe가 해결 공간이고자 해요.</p>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
     <div class="section section-dark text-center">
       <div class="container">
-        <h2 class="title">Let's talk about us</h2>
+        <h2 class="title">스터디 갤러리</h2>
         <div class="row">
           <div class="col-md-4">
             <div class="card card-profile card-plain">
-              <div class="card-avatar">
-                <a href="#avatar">
-                  <img src="<c:url value="/resources/img/faces/clem-onojeghuo-3.jpg"/>" alt="">
-                </a>
-              </div>
+              <img src="/resources/img/study.jpg" alt="" style="height:300px;">
               <div class="card-body">
-                <a href="#paper-kit">
                   <div class="author">
-                    <h4 class="card-title">Henry Ford</h4>
-                    <h6 class="card-category">Product Manager</h6>
+                  	<h4 class="card-title">Group Study Room</h4>
                   </div>
-                </a>
                 <p class="card-description text-center">
-                  Teamwork is so important that it is virtually impossible for you to reach the heights of your capabilities or make the money that you want without becoming very good at it.
+                  	과의, 토론, 모임에 집중하는 공간
                 </p>
-              </div>
-              <div class="card-footer text-center">
-                <a href="#pablo" class="btn btn-link btn-just-icon btn-neutral"><i class="fa fa-twitter"></i></a>
-                <a href="#pablo" class="btn btn-link btn-just-icon btn-neutral"><i class="fa fa-google-plus"></i></a>
-                <a href="#pablo" class="btn btn-link btn-just-icon btn-neutral"><i class="fa fa-linkedin"></i></a>
               </div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="card card-profile card-plain">
-              <div class="card-avatar">
-                <a href="#avatar">
-                  <img src="<c:url value="/resources/img/faces/joe-gardner-2.jpg"/>" alt="">
-                </a>
-              </div>
+              <img src="/resources/img/group.jpg" alt="" style="height:300px;">
               <div class="card-body">
                 <a href="#paper-kit">
                   <div class="author">
-                    <h4 class="card-title">Sophie West</h4>
-                    <h6 class="card-category">Designer</h6>
+                    <h4 class="card-title">Private Study Hall</h4>
                   </div>
                 </a>
                 <p class="card-description text-center">
-                  A group becomes a team when each member is sure enough of himself and his contribution to praise the skill of the others. No one can whistle a symphony. It takes an orchestra to play it.
+                  	나를 위해 집중하고 사색하는 공간
                 </p>
-              </div>
-              <div class="card-footer text-center">
-                <a href="#pablo" class="btn btn-link btn-just-icon btn-neutral"><i class="fa fa-twitter"></i></a>
-                <a href="#pablo" class="btn btn-link btn-just-icon btn-neutral"><i class="fa fa-google-plus"></i></a>
-                <a href="#pablo" class="btn btn-link btn-just-icon btn-neutral"><i class="fa fa-linkedin"></i></a>
               </div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="card card-profile card-plain">
-              <div class="card-avatar">
-                <a href="#avatar">
-                  <img src="../assets/img/faces/erik-lucatero-2.jpg" alt="...">
-                </a>
-              </div>
+              <img src="/resources/img/healing.jpg" alt="" style="height:300px;">
               <div class="card-body">
                 <a href="#paper-kit">
                   <div class="author">
-                    <h4 class="card-title">Robert Orben</h4>
-                    <h6 class="card-category">Developer</h6>
+                    <h4 class="card-title">Healing Cafe Hall</h4>
                   </div>
                 </a>
                 <p class="card-description text-center">
-                  The strength of the team is each individual member. The strength of each member is the team. If you can laugh together, you can work together, silence isn’t golden, it’s deadly.
+                  	지치면 쉴 수 있는....편한 공간
                 </p>
-              </div>
-              <div class="card-footer text-center">
-                <a href="#pablo" class="btn btn-link btn-just-icon btn-neutral"><i class="fa fa-twitter"></i></a>
-                <a href="#pablo" class="btn btn-link btn-just-icon btn-neutral"><i class="fa fa-google-plus"></i></a>
-                <a href="#pablo" class="btn btn-link btn-just-icon btn-neutral"><i class="fa fa-linkedin"></i></a>
               </div>
             </div>
           </div>

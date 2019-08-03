@@ -14,10 +14,6 @@ public class Dto {
 	int bStep;
 	int bIndent;
 	
-	public Dto() {
-		// TODO Auto-generated constructor stub
-	}
-	
 	public Dto(int bId, String bName, String bTitle, String bContent, Timestamp bDate, int bHit, int bGroup, int bStep, int bIndent) {
 		// TODO Auto-generated constructor stub
 		this.bId = bId;
