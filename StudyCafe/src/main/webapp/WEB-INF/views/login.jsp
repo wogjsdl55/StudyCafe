@@ -23,12 +23,12 @@
                 <i class="fa fa-twitter"></i>
               </a>
             </div>
-            <form class="register-form">
-              <label>Email</label>
-              <input type="text" class="form-control" placeholder="Email">
+            <form class="register-form" onsubmit="return login();" action="login_proc" method="post"> 
+              <label>Id</label>
+              <input type="text" class="form-control" placeholder="Id" name="MId" id="MId">
               <label>Password</label>
-              <input type="password" class="form-control" placeholder="Password">
-              <a href="login"><button class="btn btn-danger btn-block btn-round">Login</button></a>
+              <input type="password" class="form-control" name="MPwd" id="MPwd" placeholder="Password">
+              <input type="submit" class="btn btn-danger btn-block btn-round" value="로그인">
             </form>
             <div class="forgot">
               <a href="#" class="btn btn-link btn-danger">계정찾기</a>
@@ -47,3 +47,24 @@
   </div>
 
 </body>
+</html>
+
+<script>
+	function login(){
+		var MId = $("#MId").val();
+		var MPwd = $("#MPwd").val();
+		
+		if(MId.length == 0){
+	        alert("아이디를 입력해 주세요"); 
+	        $("#MId").focus();
+	        return false;
+	    }
+	    
+	    if(MPwd.length == 0){
+	        alert("비밀번호를 입력해 주세요"); 
+	        $("#MPwd").focus();
+	        return false;
+	    }
+	 	
+	}
+</script>

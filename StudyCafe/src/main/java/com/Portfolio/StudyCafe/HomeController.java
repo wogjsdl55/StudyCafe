@@ -7,24 +7,17 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.Portfolio.StudyCafe.command.ContentCommand;
-import com.Portfolio.StudyCafe.command.DeleteCommand;
-import com.Portfolio.StudyCafe.command.ListCommand;
-import com.Portfolio.StudyCafe.command.LoginCommand;
-import com.Portfolio.StudyCafe.command.MemberCommand;
-import com.Portfolio.StudyCafe.command.ModifyCommand;
-import com.Portfolio.StudyCafe.command.ReplyCommand;
-import com.Portfolio.StudyCafe.command.WriteCommand;
 import com.Portfolio.StudyCafe.dao.Dao;
-import com.Portfolio.StudyCafe.dto.Dto;
 
 /**
  * Handles requests for the application home page.
@@ -34,12 +27,16 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	Dao dao;
+/*	Dao dao; */
 	
 	@Autowired
+	private SqlSession sqlSession;
+	
+/*	@Autowired
 	public void setDao(Dao dao) {
 		this.dao = dao;
 	}
+*/	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -50,8 +47,7 @@ public class HomeController {
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		
-		String formattedDate = dateFormat.format(date);
-		
+		String formattedDate = dateFormat.format(date);	
 		model.addAttribute("serverTime", formattedDate );
 		
 		return "home";
@@ -59,8 +55,8 @@ public class HomeController {
 	
 	@RequestMapping("/list")
 	public String list(Model model) {
-		ArrayList<Dto> dtos = dao.listDao();
-		model.addAttribute("list", dtos);
+		Dao dao = sqlSession.getMapper(Dao.class);
+		model.addAttribute("list", dao.list());
 		
 		return "/list";
 	}
@@ -80,7 +76,8 @@ public class HomeController {
 	
 	@RequestMapping("/write")
 	public String write(HttpServletRequest request, Model model) {
-		dao.write(request.getParameter("bName"), request.getParameter("bTitle"), request.getParameter("bContent"));
+		Dao dao = sqlSession.getMapper(Dao.class);
+		dao.contentView(request.getParameter("strID"));
 		return "redirect:list";
 	}
 	
@@ -102,10 +99,31 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/member_proc")
-	public String member_proc(HttpServletRequest request, Model model) {
-		dao.member_proc(request.getParameter("MId"), request.getParameter("MPwd"), request.getParameter("MName"), request.getParameter("MEmail"), request.getParameter("MNick"));
+	public String member_proc(HttpServletRequest request, Model model ) {
+		Dao dao = sqlSession.getMapper(Dao.class);
 		
-		return "/";
+		if (request.getParameter("MId") == null & request.getParameter("MPwd") == null ) {
+			model.addAttribute("msg", "잘못된 접근입니다.");
+		}else {
+			dao.member_proc(request.getParameter("MId"), request.getParameter("MPwd"), request.getParameter("MName"), request.getParameter("MEmail"), request.getParameter("MNick"));
+			model.addAttribute("msg", "회원가입이 완료되었습니다.");
+		}
+		return "member_proc";
+	}
+	
+	@RequestMapping("/login_proc")
+	public String login_proc(HttpServletRequest request, Model model) {
+		Dao dao = sqlSession.getMapper(Dao.class);
+		dao.login_proc(request.getParameter("MId"), request.getParameter("MPwd") );
+		
+		
+//		if(model.get() != "" ) {
+//			model.addAttribute("msg", "로그인에 완료되었습니다.");
+//		}else {
+//			model.addAttribute("msg", "로그인에 실패하었습니다.");
+//		}
+	
+		return "login_proc";
 	}
 	
 }

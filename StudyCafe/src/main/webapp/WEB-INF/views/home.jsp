@@ -15,7 +15,7 @@
         <h3>카페형 열린 스터디 홀, 그룹 스터디 룸, 힐링카페 홀.</h3>
         <br />
         <a href="" class="btn btn-outline-neutral btn-round" style="width: 15%; margin-right: 4%; font-size: 20px;">좌석선택</a>
-        <button type="button" class="btn btn-outline-neutral btn-round" style="width: 15%; font-size: 20px;">회원가입</button>
+        <a href="member"><button type="button" class="btn btn-outline-neutral btn-round" style="width: 15%; font-size: 20px;">회원가입</button></a>
       </div>
     </div>
   </div>
@@ -205,5 +205,5 @@
       </div>
     </div>
   </footer>
-
 </body>
+</html>
