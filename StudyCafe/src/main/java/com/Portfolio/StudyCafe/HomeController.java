@@ -17,7 +17,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.Portfolio.StudyCafe.dao.Dao;
+import com.Portfolio.StudyCafe.dao.MemberDao;
+import com.Portfolio.StudyCafe.dto.Dto;
+import com.Portfolio.StudyCafe.dto.Login_Dto;
 
 /**
  * Handles requests for the application home page.
@@ -55,7 +57,7 @@ public class HomeController {
 	
 	@RequestMapping("/list")
 	public String list(Model model) {
-		Dao dao = sqlSession.getMapper(Dao.class);
+		MemberDao dao = sqlSession.getMapper(MemberDao.class);
 		model.addAttribute("list", dao.list());
 		
 		return "/list";
@@ -76,7 +78,7 @@ public class HomeController {
 	
 	@RequestMapping("/write")
 	public String write(HttpServletRequest request, Model model) {
-		Dao dao = sqlSession.getMapper(Dao.class);
+		MemberDao dao = sqlSession.getMapper(MemberDao.class);
 		dao.contentView(request.getParameter("strID"));
 		return "redirect:list";
 	}
@@ -100,7 +102,7 @@ public class HomeController {
 	
 	@RequestMapping("/member_proc")
 	public String member_proc(HttpServletRequest request, Model model ) {
-		Dao dao = sqlSession.getMapper(Dao.class);
+		MemberDao dao = sqlSession.getMapper(MemberDao.class);
 		
 		if (request.getParameter("MId") == null & request.getParameter("MPwd") == null ) {
 			model.addAttribute("msg", "잘못된 접근입니다.");
@@ -113,16 +115,16 @@ public class HomeController {
 	
 	@RequestMapping("/login_proc")
 	public String login_proc(HttpServletRequest request, Model model) {
-		Dao dao = sqlSession.getMapper(Dao.class);
-		dao.login_proc(request.getParameter("MId"), request.getParameter("MPwd") );
+		MemberDao dao = sqlSession.getMapper(MemberDao.class);
+		ArrayList<Login_Dto> result = dao.login_proc(request.getParameter("MId"), request.getParameter("MPwd") );
+		model.addAttribute("login", result);
+		System.out.println(result);
+		if (result.isEmpty()) {
+			model.addAttribute("msg", "아이디 또는 비밀번호가 올바르지 않습니다.");
+		}else {
+			model.addAttribute("msg", "로그인에 완료되었습니다.");
+		}
 		
-		
-//		if(model.get() != "" ) {
-//			model.addAttribute("msg", "로그인에 완료되었습니다.");
-//		}else {
-//			model.addAttribute("msg", "로그인에 실패하었습니다.");
-//		}
-	
 		return "login_proc";
 	}
 	

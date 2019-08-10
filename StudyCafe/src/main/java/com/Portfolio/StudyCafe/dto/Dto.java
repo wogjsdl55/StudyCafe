@@ -11,7 +11,7 @@ public class Dto {
 	private	String MEmail;
 	private	Timestamp MRegdate;
 	private	String MNick;
-	
+
 	public Dto(int MSeq, String MId, String MPwd, String MEmail, Timestamp MRegdate, String MNick) {
 		// TODO Auto-generated constructor stub
 		this.MSeq = MSeq;
@@ -21,7 +21,7 @@ public class Dto {
 		this.MRegdate =  MRegdate;
 		this.MNick = MNick;
 	}
-
+	
 	public int getMSeq() {
 		return MSeq;
 	}
@@ -77,5 +77,6 @@ public class Dto {
 	public void setMNick(String mNick) {
 		MNick = mNick;
 	}
+	
 	
 }
