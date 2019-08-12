@@ -124,11 +124,6 @@
 			<version>4.1.4.RELEASE</version>
 		</dependency>
 		
-		<dependency>
-			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc6</artifactId>
-			<version>11.2.0</version>
-		</dependency>
 		
 		<!-- apache 한글 오류 해결 -->
 		<dependency>
@@ -146,6 +141,11 @@
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
 			<version>1.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.16</version>
 		</dependency>
 	</dependencies>
     <build>

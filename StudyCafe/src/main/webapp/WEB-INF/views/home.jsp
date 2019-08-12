@@ -6,15 +6,14 @@
 
 <body class="landing-page sidebar-collapse">
   <%@ include file="/WEB-INF/views/include/top.jsp" %>
-
-  <div class="page-header" data-parallax="true" style="background-image: url('/resources/img/bg-masthead.jpg');">
+  <div class="page-header" data-parallax="true" style="background-image: url('/resources/img/bg-masthead.jpg'); background-repeat: no-repeat; height: 100%;">
     <div class="container">
       <div class="motto text-center">
         <h1>문화/학습/카페 공간</h1>
         <h3>카페형 열린 스터디 홀, 그룹 스터디 룸, 힐링카페 홀.</h3>
         <br />
-        <a href="" class="btn btn-outline-neutral btn-round" style="width: 15%; margin-right: 4%; font-size: 20px;">좌석선택</a>
-        <a href="/member/member"><button type="button" class="btn btn-outline-neutral btn-round" style="width: 15%; font-size: 20px;">회원가입</button></a>
+        <a href="" class="btn btn-outline-neutral btn-round" style="width: 17vh; margin-right: 4%; font-size: 1.5vw;">좌석선택</a>
+        <a href="/member/member"><button type="button" class="btn btn-outline-neutral btn-round" style="width: 17vh; font-size: 1.5vw;">회원가입</button></a>
       </div>
     </div>
   </div>
@@ -24,7 +23,7 @@
         <div class="row">
           <div class="col-md-8 ml-auto mr-auto">
             <h2 class="title">노맨의 Study Cafe</h2>
-            <h5 class="description">
+            <h5 class="description" style="font-size: 0; line-height: 0;">
             	130평대 대형 오픈형
 				스터디공간과<br/>
 				2~20인이 들어가는 독립형 스터디룸 10여개를 갖춘<br/>
@@ -35,15 +34,15 @@
         </div>
         <br/>
         <br/>
-        <div class="row">
+        <div class="row" style="flex-wrap: inherit;">
           <div class="col-md-3">
             <div class="info">
               <div class="icon icon-danger">
                 <img src="/resources/img/trophy.png" style="width: 60px;">
               </div>
               <div class="description">
-                <h4 class="info-title">집에서 과외하기 부담스러울 때</h4>
-                <p class="description">부모님도 선생님도 조금씩 부담스러운 과외공간.<br/>그럴 때 바로 노맨의 Study Cafe가 해결 공간이고자 해요.</p>
+                <h4 class="info-title" style="padding-bottom: 1vh;">집에서 과외하기 부담스러울 때</h4>
+                <p class="description" style="font-size: 1.2vw; width: 15vw;">부모님도 선생님도 조금씩 부담스러운 과외공간.<br/>그럴 때 바로 노맨의 Study Cafe가 해결 공간이고자 해요.</p>
               </div>
             </div>
           </div>
@@ -53,8 +52,8 @@
               	<img src="/resources/img/file.png" style="width: 60px;">
               </div>
               <div class="description">
-                <h4 class="info-title">자유롭고 독립적인 공간</h4>
-                <p>토론/모임 공간이 독립/자유롭고,<br/>최적의 OA 환경(대형모니터 등)을 갖춘 곳</p>
+                <h4 class="info-title" style="padding-bottom: 1vh;">자유롭고 독립적인 공간</h4>
+                <p style="font-size: 1.2vw; width: 15vw;">토론/모임 공간이 독립/자유롭고,<br/>최적의 OA 환경(대형모니터 등)을 갖춘 곳</p>
               </div>
             </div>
           </div>
@@ -64,9 +63,9 @@
                 <img src="/resources/img/circle.png" style="width: 60px;">
               </div>
               <div class="description">
-                <h4 class="info-title">오래 있어도 편한 곳</h4>
-                <p>커피숍처럼 오랫동안 있다고해도 눈치 보지 않아도 되는 곳</p>
-              </div>
+                <h4 class="info-title" style="padding-bottom: 1vh;">오래 있어도 편한 곳</h4>
+                <p style="font-size: 1.2vw; width: 15vw;">커피숍처럼 오랫동안 있다고해도 눈치 보지 않아도 되는 곳</p>
+              </div> 
             </div>
           </div>
           <div class="col-md-3">
@@ -75,8 +74,8 @@
                 <img src="/resources/img/medal.png" style="width: 60px;">
               </div>
               <div class="description">
-                <h4 class="info-title">집에서는 도저히...</h4>
-                <p>집중도 안되고 뭔가 유혹이 많을 때…</br>노맨의 Study Cafe가 해결 공간이고자 해요.</p>
+                <h4 class="info-title" style="padding-bottom: 1vh;">집에서는 도저히...</h4>
+                <p style="font-size: 1.2vw; width: 15vw;">집중도 안되고 뭔가 유혹이 많을 때…</br>노맨의 Study Cafe가 해결 공간이고자 해요.</p>
               </div>
             </div>
           </div>

@@ -14,11 +14,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.Portfolio.StudyCafe.dao.MemberDao;
+import com.Portfolio.StudyCafe.dao.ReviewDao;
 import com.Portfolio.StudyCafe.dto.Dto;
 import com.Portfolio.StudyCafe.dto.Login_Dto;
 
@@ -77,12 +77,6 @@ public class HomeController {
 		return "/writeForm";
 	}
 	
-	@RequestMapping("/write")
-	public String write(HttpServletRequest request, Model model) {
-		MemberDao dao = sqlSession.getMapper(MemberDao.class);
-		dao.contentView(request.getParameter("strID"));
-		return "redirect:list";
-	}
 	
 	@RequestMapping("/content_view")
 	public String content_view(HttpServletRequest request, Model model){
@@ -152,5 +146,26 @@ public class HomeController {
 		
 		return "/member/login_proc";
 	}
+
+	@RequestMapping("/review/review")
+	public String review_list(Model model) {
+	//	ReviewDao dao = sqlSession.getMapper(ReviewDao.class);
+	//	model.addAttribute("list", dao.review_list());
+		
+		return "/review/review";
+	}
 	
+	@RequestMapping("/review/review_write")
+	public String review_write(Model model) {
+		
+		return "/review/review_write";
+	}
+	
+	@RequestMapping("/review/review_write_proc")
+	public String review_write(HttpServletRequest request, Model model) {
+		ReviewDao dao = sqlSession.getMapper(ReviewDao.class);
+		dao.review_write(request.getParameter("RSubject"), request.getParameter("RComment"), request.getParameter("MId") );
+		
+		return "/review/review_write_proc";
+	}
 }

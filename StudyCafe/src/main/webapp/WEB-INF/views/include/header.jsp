@@ -28,7 +28,9 @@
 	  <script src="/resources/js/plugins/nouislider.min.js" type="text/javascript"></script>
 	  <!-- Control Center for Paper Kit: parallax effects, scripts for the example pages etc -->
 	  <script src="/resources/js/paper-kit.js?v=2.2.0" type="text/javascript"></script>
-	  
+	 
+	 <meta name="viewport" content="width=device-width, user-scalable=no">
+
 	</head>
 
 </html>

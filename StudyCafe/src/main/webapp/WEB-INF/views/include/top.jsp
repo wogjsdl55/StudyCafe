@@ -11,7 +11,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Insert title here</title>
 </head>
 <body>
 	<!-- Navbar -->
@@ -30,14 +29,18 @@
 	      <div class="collapse navbar-collapse justify-content-end" id="navigation">
 	      	<ul class="navbar-nav">
 	        	<li class="nav-item">
-	            	<a href="/" class="nav-link" style="font-size: 20px;">HOME</a>
+	            	<a href="/" class="nav-link" style="font-size: 20px;">홈</a>
 	          	</li>
 	          	<li class="nav-item">
-	            	<a href="notice" class="nav-link" style="font-size: 20px;">공지사항</a>
+	            	<a href="/review/review" class="nav-link" style="font-size: 20px;">리뷰작성</a>
 	          	</li>
 				
 	    	    <li class="nav-item">
-		    	    <a href="/member/memer_edit" class="nav-link" style="font-size: 20px;"><%=login_name%></a>		    	    
+	    	<% if(login_name != "로그인"){%>
+		    	    <a href="/member/member_edit" class="nav-link" style="font-size: 20px;"><%=login_name%></a>
+		   	<% } else { %>
+		   			<a href="/member/login" class="nav-link" style="font-size: 20px;"><%=login_name%></a>
+		   	<% } %>		    	    
 	          	</li>
 	      	<% if(login_name != "로그인"){%>
 	          	<li class="nav-item">

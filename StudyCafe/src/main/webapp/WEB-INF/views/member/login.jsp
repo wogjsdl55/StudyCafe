@@ -32,7 +32,7 @@
             </form>
             <div class="forgot">
               <a href="#" class="btn btn-link btn-danger">계정찾기</a>
-              <a href="member" class="btn btn-link btn-danger">회원가입</a>
+              <a href="/member/member" class="btn btn-link btn-danger">회원가입</a>
             </div>
           </div>
         </div>
