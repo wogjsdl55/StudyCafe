@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -88,44 +89,68 @@ public class HomeController {
 		return "/view";
 	}
 	
-	@RequestMapping("/login")
-	public String login(Model model) {
-		
-		return "login";
-	}
-	
-	@RequestMapping("/member")
+	@RequestMapping("/member/member")
 	public String member(Model model) {
 		
-		return "member";
+		return "/member/member";
 	}
 	
-	@RequestMapping("/member_proc")
+	@RequestMapping("/member/member_edit")
+	public String member_edit(Model model) {
+		
+		return "/member/member_edit";
+	}
+	
+	@RequestMapping("/member/member_proc")
 	public String member_proc(HttpServletRequest request, Model model ) {
 		MemberDao dao = sqlSession.getMapper(MemberDao.class);
 		
 		if (request.getParameter("MId") == null & request.getParameter("MPwd") == null ) {
-			model.addAttribute("msg", "잘못된 접근입니다.");
-		}else {
-			dao.member_proc(request.getParameter("MId"), request.getParameter("MPwd"), request.getParameter("MName"), request.getParameter("MEmail"), request.getParameter("MNick"));
-			model.addAttribute("msg", "회원가입이 완료되었습니다.");
-		}
-		return "member_proc";
-	}
-	
-	@RequestMapping("/login_proc")
-	public String login_proc(HttpServletRequest request, Model model) {
-		MemberDao dao = sqlSession.getMapper(MemberDao.class);
-		ArrayList<Login_Dto> result = dao.login_proc(request.getParameter("MId"), request.getParameter("MPwd") );
-		model.addAttribute("login", result);
-		System.out.println(result);
-		if (result.isEmpty()) {
-			model.addAttribute("msg", "아이디 또는 비밀번호가 올바르지 않습니다.");
-		}else {
-			model.addAttribute("msg", "로그인에 완료되었습니다.");
+			model.addAttribute("msg", "잘못된 접근입니다.");	
+			return "/member/member_proc";
 		}
 		
-		return "login_proc";
+		dao.member_proc(request.getParameter("MId"), request.getParameter("MPwd"), request.getParameter("MName"), request.getParameter("MEmail"), request.getParameter("MNick"));
+		model.addAttribute("msg", "회원가입이 완료되었습니다.");
+		return "/member/member_proc";
+	}
+	
+	@RequestMapping("/member/login")
+	public String login(Model model) {
+		
+		return "/member/login";
+	}
+	
+	@RequestMapping("/member/login_out")
+	public String login_out(Model model, HttpSession session) {
+		session.removeAttribute("login_name");
+		model.addAttribute("msg", "로그아웃 되었습니다.");
+		return "/member/login_out";
+	}
+	
+	@RequestMapping("/member/login_proc")
+	public String login_proc(HttpServletRequest request, Model model, HttpSession session) {
+		MemberDao dao = sqlSession.getMapper(MemberDao.class);
+		
+		if (request.getParameter("MId") == null & request.getParameter("MPwd") == null ) {
+			model.addAttribute("msg", "잘못된 접근입니다.");
+			return "/member/login_proc";
+		}
+		
+		String login_name = dao.login_proc(request.getParameter("MId"), request.getParameter("MPwd") );
+		System.out.println(login_name);
+		/*기존에 login이란 세션 값이 존재한다면, 기존값을 제거*/
+		if ( session.getAttribute("login_name") != null ){
+			session.removeAttribute("login_name");
+		}
+		if (login_name == null || login_name == "") {
+			model.addAttribute("msg", "아이디 또는 비밀번호가 잘못되었습니다.");
+		}else {
+			session.setAttribute("login_name", login_name);
+			model.addAttribute("msg", "로그인 되었습니다.");
+		}
+		
+		return "/member/login_proc";
 	}
 	
 }

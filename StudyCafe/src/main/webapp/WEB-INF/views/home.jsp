@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
 <html>
 <!DOCTYPE html>
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
@@ -15,7 +14,7 @@
         <h3>카페형 열린 스터디 홀, 그룹 스터디 룸, 힐링카페 홀.</h3>
         <br />
         <a href="" class="btn btn-outline-neutral btn-round" style="width: 15%; margin-right: 4%; font-size: 20px;">좌석선택</a>
-        <a href="member"><button type="button" class="btn btn-outline-neutral btn-round" style="width: 15%; font-size: 20px;">회원가입</button></a>
+        <a href="/member/member"><button type="button" class="btn btn-outline-neutral btn-round" style="width: 15%; font-size: 20px;">회원가입</button></a>
       </div>
     </div>
   </div>

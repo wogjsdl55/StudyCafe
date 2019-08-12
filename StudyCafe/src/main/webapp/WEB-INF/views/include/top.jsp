@@ -1,4 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%
+	String login_name;
+
+	if((String)session.getAttribute("login_name") == null){
+		login_name = "로그인";
+	}else {
+		login_name = (String)session.getAttribute("login_name");
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,10 +35,15 @@
 	          	<li class="nav-item">
 	            	<a href="notice" class="nav-link" style="font-size: 20px;">공지사항</a>
 	          	</li>
-		
+				
 	    	    <li class="nav-item">
-	        		<a href="login" class="nav-link" style="font-size: 20px;">로그인</a>
+		    	    <a href="/member/memer_edit" class="nav-link" style="font-size: 20px;"><%=login_name%></a>		    	    
 	          	</li>
+	      	<% if(login_name != "로그인"){%>
+	          	<li class="nav-item">
+	        		<a href="/member/login_out" class="nav-link" style="font-size: 20px;">로그아웃</a>
+	        	</li>
+	        <% } %>
 	        </ul>
 	      </div>
 	  </div>
