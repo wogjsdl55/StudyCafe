@@ -3,6 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
@@ -22,14 +23,22 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.Portfolio.StudyCafe" />
-	
-	<beans:bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
+ 
+	 <beans:bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
 		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<beans:property name="url" value="jdbc:mysql://localhost:3306/wogjsdl55?serverTimezone=UTC" />
 		<beans:property name="username" value="wogjsdl55" />
 		<beans:property name="password" value="shwo2936" />
+	</beans:bean>	
+	 <!-- 
+	<beans:bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
+		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<beans:property name="url" value="jdbc:mysql://localhost:3307/studycafe?serverTimezone=UTC" />
+		<beans:property name="username" value="root" />
+		<beans:property name="password" value="shwo2936" />
 	</beans:bean>
-	
+  
+      --> 
 <!-- <beans:bean name="template" class="org.springframework.jdbc.core.JdbcTemplate">
 		<beans:property name="dataSource" ref="dataSource"></beans:property>
 	</beans:bean>

@@ -1,13 +1,7 @@
+<%@page import="com.Portfolio.StudyCafe.dto.Member_Dto"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%
-	String login_name;
-
-	if((String)session.getAttribute("login_name") == null){
-		login_name = "로그인";
-	}else {
-		login_name = (String)session.getAttribute("login_name");
-	}
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,17 +30,24 @@
 	          	</li>
 				
 	    	    <li class="nav-item">
-	    	<% if(login_name != "로그인"){%>
-		    	    <a href="/member/member_edit" class="nav-link" style="font-size: 20px;"><%=login_name%></a>
-		   	<% } else { %>
-		   			<a href="/member/login" class="nav-link" style="font-size: 20px;"><%=login_name%></a>
-		   	<% } %>		    	    
-	          	</li>
-	      	<% if(login_name != "로그인"){%>
-	          	<li class="nav-item">
-	        		<a href="/member/login_out" class="nav-link" style="font-size: 20px;">로그아웃</a>
-	        	</li>
-	        <% } %>
+	    	    
+	    	<c:choose> 
+	    		<c:when test="${login_result != null}">
+	    			<c:forEach items="${login_result}" var="result">
+	    				<li class="nav-item">
+		    	    		<a href="/member/member_edit?seq=${result.MSeq}" class="nav-link" style="font-size: 20px;">${result.MNick}</a>
+		    	    	</li>
+		    	    </c:forEach>
+		    	    	<li class="nav-item">
+		        			<a href="/member/login_out" class="nav-link" style="font-size: 20px;">로그아웃</a>
+		        		</li>
+		        </c:when>
+		      
+		   		<c:when test="${login_result == null}">
+		   			<a href="/member/login" class="nav-link" style="font-size: 20px;">로그인</a>
+				</c:when>
+		   	</c:choose>
+
 	        </ul>
 	      </div>
 	  </div>

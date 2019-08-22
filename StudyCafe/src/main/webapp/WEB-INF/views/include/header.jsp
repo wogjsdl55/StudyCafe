@@ -17,6 +17,7 @@
 	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 	  <!--   Core JS Files   -->
 	  <script src="/resources/js/core/jquery.min.js" type="text/javascript"></script>
+	  <script src="/resources/ckeditor/ckeditor.js">
 	  <script src="/resources/js/core/popper.min.js" type="text/javascript"></script>
 	  <script src="/resources/js/core/bootstrap.min.js" type="text/javascript"></script>
 	  <script src="/resources/js/member.js" type="text/javascript"></script>

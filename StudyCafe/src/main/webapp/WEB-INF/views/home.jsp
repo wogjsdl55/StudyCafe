@@ -137,8 +137,8 @@
       <div class="container">
         <div class="row">
           <div class="col-md-8 ml-auto mr-auto">
-            <h2 class="text-center">Keep in touch?</h2>
-            <form class="contact-form">
+            <h2 class="text-center">문의사항</h2>
+            <form class="contact-form" action="send_mail">
               <div class="row">
                 <div class="col-md-6">
                   <label>Name</label>
@@ -148,7 +148,7 @@
                         <i class="nc-icon nc-single-02"></i>
                       </span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Name">
+                    <input type="text" name="title" class="form-control" placeholder="Name">
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -159,17 +159,17 @@
                         <i class="nc-icon nc-email-85"></i>
                       </span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Email">
+                    <input type="text" name="setfrom" class="form-control" placeholder="Email">
                   </div>
                 </div>
               </div>
               <label>Message</label>
-              <textarea class="form-control" rows="4" placeholder="Tell us your thoughts and feelings..."></textarea>
+              <textarea class="form-control" name="content" rows="4" ></textarea>
               <div class="row">
-                <div class="col-md-4 ml-auto mr-auto">
-                  <button class="btn btn-danger btn-lg btn-fill">Send Message</button>
+                <div class="col-md-4 ml-auto mr-auto" style="text-align: center;">
+                	<input type="submit" class="btn btn-danger btn-lg btn-fill" value="전송">
                 </div>
-              </div>
+              </div> 
             </form>
           </div>
         </div>
@@ -179,19 +179,6 @@
   <footer class="footer   footer-white ">
     <div class="container">
       <div class="row">
-        <nav class="footer-nav">
-          <ul>
-            <li>
-              <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>
-            </li>
-            <li>
-              <a href="http://blog.creative-tim.com/" target="_blank">Blog</a>
-            </li>
-            <li>
-              <a href="https://www.creative-tim.com/license" target="_blank">Licenses</a>
-            </li>
-          </ul>
-        </nav>
         <div class="credits ml-auto">
           <span class="copyright">
             ©

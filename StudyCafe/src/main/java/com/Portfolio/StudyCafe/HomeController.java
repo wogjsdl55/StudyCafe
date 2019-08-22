@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -16,11 +17,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 
 import com.Portfolio.StudyCafe.dao.MemberDao;
 import com.Portfolio.StudyCafe.dao.ReviewDao;
-import com.Portfolio.StudyCafe.dto.Dto;
-import com.Portfolio.StudyCafe.dto.Login_Dto;
+import com.Portfolio.StudyCafe.dto.Member_Dto;
+import com.Portfolio.StudyCafe.dto.Review_Dto;
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 
 /**
  * Handles requests for the application home page.
@@ -35,6 +40,10 @@ public class HomeController {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	
+	@Autowired 
+	private JavaMailSender mailSender;
+
 /*	@Autowired
 	public void setDao(Dao dao) {
 		this.dao = dao;
@@ -56,32 +65,34 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping("/list")
-	public String list(Model model) {
-		MemberDao dao = sqlSession.getMapper(MemberDao.class);
-		model.addAttribute("list", dao.list());
-		
-		return "/list";
+	@RequestMapping("/send_mail")
+	public String send_mail(HttpServletRequest request, Model model){
+		String setfrom = request.getParameter("setfrom");
+		String tomail = "shwogjs00@gmail.com"; // 받는 사람 이메일
+		String title = request.getParameter("title") + "입니다"; // 제목
+		String content = request.getParameter("content"); // 내용
+
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message,
+					true, "UTF-8");
+  
+			messageHelper.setFrom(setfrom); // 보내는사람 생략하면 정상작동을 안함
+			messageHelper.setTo(tomail); // 받는사람 이메일
+			messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+			messageHelper.setText(content); // 메일 내용
+
+			mailSender.send(message);
+			
+			model.addAttribute("msg", "메일전송이 성공하였습니다.");
+		} catch (Exception e) {
+			System.out.println(e);
+			model.addAttribute("msg", "메일전송이 실패하였습니다.");
+		}
+
+		return "/send_mail";
 	}
-	
-	@RequestMapping("/write_view")
-	public String write_view(Model model) {
-		System.out.println("write_view()");
-		
-		return "write_view";
-	}
-	
-	@RequestMapping("/writeForm")
-	public String writeForm() {
-		
-		return "/writeForm";
-	}
-	
-	
-	@RequestMapping("/content_view")
-	public String content_view(HttpServletRequest request, Model model){
-		return "/view";
-	}
+
 	
 	@RequestMapping("/member/member")
 	public String member(Model model) {
@@ -90,9 +101,20 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/member/member_edit")
-	public String member_edit(Model model) {
-		
+	public String member_edit(HttpServletRequest request, Model model) {
+		MemberDao dao = sqlSession.getMapper(MemberDao.class);
+		ArrayList<Member_Dto> member_edit = dao.member_edit( Integer.parseInt(request.getParameter("seq") ));
+		model.addAttribute("result", member_edit);
+
 		return "/member/member_edit";
+	}
+	
+	@RequestMapping("/member/member_edit_proc")
+	public String member_edit_proc(HttpServletRequest request, Model model) {
+		MemberDao dao = sqlSession.getMapper(MemberDao.class);
+		dao.member_edit_proc( Integer.parseInt(request.getParameter("MSeq")), request.getParameter("MId"), request.getParameter("MPwd"), request.getParameter("MName"), request.getParameter("MEmail"), request.getParameter("MNick"));
+		model.addAttribute("msg", "수정이 완료되었습니다.");
+		return "/member/member_edit_proc";
 	}
 	
 	@RequestMapping("/member/member_proc")
@@ -117,7 +139,7 @@ public class HomeController {
 	
 	@RequestMapping("/member/login_out")
 	public String login_out(Model model, HttpSession session) {
-		session.removeAttribute("login_name");
+		session.removeAttribute("login_result");
 		model.addAttribute("msg", "로그아웃 되었습니다.");
 		return "/member/login_out";
 	}
@@ -131,41 +153,72 @@ public class HomeController {
 			return "/member/login_proc";
 		}
 		
-		String login_name = dao.login_proc(request.getParameter("MId"), request.getParameter("MPwd") );
-		System.out.println(login_name);
+		ArrayList<Member_Dto> login_result = dao.login_proc(request.getParameter("MId"), request.getParameter("MPwd") );
+	
 		/*기존에 login이란 세션 값이 존재한다면, 기존값을 제거*/
-		if ( session.getAttribute("login_name") != null ){
-			session.removeAttribute("login_name");
-		}
-		if (login_name == null || login_name == "") {
+		if ( session.getAttribute("login_result") != null ){
+			session.removeAttribute("login_result");
+		} 
+		if (login_result.isEmpty() ) {
 			model.addAttribute("msg", "아이디 또는 비밀번호가 잘못되었습니다.");
 		}else {
-			session.setAttribute("login_name", login_name);
+			session.setAttribute("login_result", login_result);
 			model.addAttribute("msg", "로그인 되었습니다.");
 		}
 		
 		return "/member/login_proc";
 	}
+	
+	@RequestMapping("/member/naver_login")
+	public String naver_member(Model model, HttpSession session) {
+	
+		return "/member/naver_login";
+	}
 
 	@RequestMapping("/review/review")
 	public String review_list(Model model) {
-	//	ReviewDao dao = sqlSession.getMapper(ReviewDao.class);
-	//	model.addAttribute("list", dao.review_list());
+		ReviewDao dao = sqlSession.getMapper(ReviewDao.class);
+		model.addAttribute("review_list", dao.review_list());
 		
 		return "/review/review";
 	}
 	
 	@RequestMapping("/review/review_write")
 	public String review_write(Model model) {
-		
 		return "/review/review_write";
 	}
 	
 	@RequestMapping("/review/review_write_proc")
 	public String review_write(HttpServletRequest request, Model model) {
 		ReviewDao dao = sqlSession.getMapper(ReviewDao.class);
-		dao.review_write(request.getParameter("RSubject"), request.getParameter("RComment"), request.getParameter("MId") );
+		dao.review_write(request.getParameter("RSubject"), request.getParameter("RComment"), Integer.parseInt(request.getParameter("MStar")), request.getParameter("MId"), request.getParameter("MNick") );
 		
+		model.addAttribute("msg", "글 작성이 완료 되었습니다.");
 		return "/review/review_write_proc";
+	}
+	
+	@RequestMapping("/review/review_view")
+	public String review_view(HttpServletRequest request, Model model) {
+		ReviewDao dao = sqlSession.getMapper(ReviewDao.class);
+		
+		dao.review_view_count(Integer.parseInt(request.getParameter("seq")) );
+		  
+		ArrayList<Review_Dto> view_result = dao.review_view(Integer.parseInt(request.getParameter("seq")) );
+		model.addAttribute("result", view_result);
+		
+		ArrayList<Review_Dto> reply_list = dao.reply_list(Integer.parseInt(request.getParameter("seq")) );
+		model.addAttribute("result_list", reply_list);
+
+		return "/review/review_view";
+	}
+	
+	
+	@RequestMapping(value="/review/review_reply_ajax", produces="text/json; charset=utf-8", method=RequestMethod.POST)
+	public  @ResponseBody String reply_proc(HttpServletRequest request, Model model ) {
+		ReviewDao dao = sqlSession.getMapper(ReviewDao.class);
+
+		dao.review_reply_proc(Integer.parseInt(request.getParameter("RSeq")), request.getParameter("ReComment"), request.getParameter("MNick") );
+
+		return "/review/review_view";
 	}
 }
