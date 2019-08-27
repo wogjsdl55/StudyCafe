@@ -42,6 +42,15 @@
 		        			<a href="/member/login_out" class="nav-link" style="font-size: 20px;">로그아웃</a>
 		        		</li>
 		        </c:when>
+		        
+		        <c:when test="${naver_info != null}">
+    				<li class="nav-item">
+	    	    		<a href="#"  class="nav-link" style="font-size: 20px;">${naver_info[1]}</a>
+	    	    	</li>
+	    	    	<li class="nav-item">
+	        			<a href="/member/login_out" class="nav-link" style="font-size: 20px;">로그아웃</a>
+	        		</li>
+		        </c:when>
 		      
 		   		<c:when test="${login_result == null}">
 		   			<a href="/member/login" class="nav-link" style="font-size: 20px;">로그인</a>

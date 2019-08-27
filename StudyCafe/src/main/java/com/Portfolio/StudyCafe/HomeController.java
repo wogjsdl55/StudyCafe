@@ -1,5 +1,9 @@
 package com.Portfolio.StudyCafe;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -140,6 +144,7 @@ public class HomeController {
 	@RequestMapping("/member/login_out")
 	public String login_out(Model model, HttpSession session) {
 		session.removeAttribute("login_result");
+		session.removeAttribute("naver_info");
 		model.addAttribute("msg", "로그아웃 되었습니다.");
 		return "/member/login_out";
 	}
@@ -171,7 +176,8 @@ public class HomeController {
 	
 	@RequestMapping("/member/naver_login")
 	public String naver_member(Model model, HttpSession session) {
-	
+		
+		
 		return "/member/naver_login";
 	}
 
@@ -221,4 +227,5 @@ public class HomeController {
 
 		return "/review/review_view";
 	}
+	
 }

@@ -2,8 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <!DOCTYPE html>
-<%@ include file="/WEB-INF/views/include/header.jsp" %>
 
+<%@ include file="/WEB-INF/views/include/header.jsp" %>
 <body class="landing-page sidebar-collapse">
   <%@ include file="/WEB-INF/views/include/top.jsp" %>
   <div class="page-header" data-parallax="true" style="background-image: url('/resources/img/bg-masthead.jpg'); background-repeat: no-repeat; height: 100%;">
