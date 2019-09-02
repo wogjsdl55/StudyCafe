@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.Portfolio.StudyCafe.dao.ReviewDao">	
+
+	<select id="review_list" resultType="com.Portfolio.StudyCafe.dto.Review_Dto">
+		SELECT * FROM mvc_review ORDER BY RRegdate DESC 
+	</select>
+	
+	<select id="review_view" resultType="com.Portfolio.StudyCafe.dto.Review_Dto">
+		SELECT * FROM mvc_review WHERE RSeq = #{param1}
+	</select>
+	
+	<select id="reply_list" resultType="com.Portfolio.StudyCafe.dto.Review_Dto">
+		SELECT * FROM mvc_review_reply WHERE RSeq = #{param1}
+	</select>
+	
+	<insert id="review_write">
+		INSERT INTO mvc_review (RSubject, RComment, RStar, MId, MNick) 
+		VALUES (#{param1}, #{param2}, #{param3}, #{param4}, #{param5})
+	</insert>
+	
+	<insert id="review_reply_proc">
+		INSERT INTO mvc_review_reply (RSeq, ReComment, MNick ) 
+		VALUES (#{param1}, #{param2}, #{param3} )
+	</insert>
+	
+	<update id="review_view_count">
+		UPDATE mvc_review SET RView = RView + 1 WHERE RSeq = #{param1}
+	</update>
+	
+	<delete id="delete">
+	
+	</delete>	
+	
+</mapper>

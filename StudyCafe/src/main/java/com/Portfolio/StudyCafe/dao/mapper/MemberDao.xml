@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.Portfolio.StudyCafe.dao.MemberDao">	
+	<select id="login_proc" resultType="com.Portfolio.StudyCafe.dto.Member_Dto">
+		SELECT MSeq, MId, MNick
+		FROM mvc_member 
+		WHERE MId = #{param1} AND MPwd = #{param2}
+	</select>
+	
+	<select id="member_edit" resultType="com.Portfolio.StudyCafe.dto.Member_Dto">
+		SELECT *
+		FROM mvc_member 
+		WHERE MSEQ = #{param1} 
+	</select>
+	
+	<insert id="member_proc">
+		INSERT INTO mvc_member (MId, MPwd, MName, MEmail, MNick ) 
+		VALUES (#{param1}, #{param2}, #{param3}, #{param4}, #{param5})
+	</insert>
+	
+	<update id="member_edit_proc">
+		UPDATE mvc_member SET MId = #{param2}, MPwd = #{param3}, MName = #{param4}, MEmail = #{param5}, MNick = #{param6} 
+		WHERE MSeq = #{param1}
+	</update>
+	
+	<delete id="delete">
+	
+	</delete>
+	
+	
+	
+	
+</mapper>
